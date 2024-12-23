@@ -1,0 +1,67 @@
+//João Victor de Jesus Augusto
+let estoque = [
+    { titulo: "O Segredo", autor: "Rhonda Byrne", quantidade: 10 },
+    { titulo: "Dom Casmurro", autor: "Machado de Assis", quantidade: 5 }
+];
+
+// Adicionando Livros
+function adicionarLivro(titulo, autor, quantidade) {
+    // Verifica se o livro já existe no estoque
+    let livroExistente = estoque.find(livro => livro.titulo === titulo);
+
+    if (livroExistente) {
+        // Se o livro já existe, soma na quantidade
+        livroExistente.quantidade += quantidade;
+        console.log(`A quantidade do livro "${titulo}" foi atualizada para ${livroExistente.quantidade}.`);
+    } else {
+        // Se livro não adicona, adiciona aqui
+        estoque.push({ titulo, autor, quantidade });
+        console.log(`O livro "${titulo}" foi adicionado ao estoque.`);
+    }
+}
+
+// Remover um livro 
+function removerLivro(titulo) {
+    // Encontra índice de livro
+    const indice = estoque.findIndex(livro => livro.titulo === titulo);
+
+    if (indice !== -1) {
+        // Remove o livro
+        estoque.splice(indice, 1);
+        console.log(`O livro "${titulo}" foi removido do estoque.`);
+    } else {
+        console.log(`O livro "${titulo}" não foi encontrado no estoque.`);
+    }
+}
+
+// Atualizar a quantidade de um livro 
+function atualizarQuantidade(titulo, novaQuantidade) {
+    // Encontra o livro pelo título
+    let livro = estoque.find(livro => livro.titulo === titulo);
+
+    if (livro) {
+        // Atualiza a quantidade do livro
+        livro.quantidade = novaQuantidade;
+        console.log(`A quantidade do livro "${titulo}" foi atualizada para ${novaQuantidade}.`);
+    } else {
+        console.log(`O livro "${titulo}" não foi encontrado no estoque.`);
+    }
+}
+
+// Mostra lista de livros
+function listarLivros() {
+    if (estoque.length === 0) {
+        console.log("O estoque está vazio.");
+    } else {
+        console.log("Livros disponíveis no estoque:");
+        estoque.forEach(livro => {
+            console.log(`Título: ${livro.titulo}, Autor: ${livro.autor}, Quantidade: ${livro.quantidade}`);
+        });
+    }
+}
+
+// Teste
+adicionarLivro("O Guarani", "José de Alencar", 7);
+removerLivro("Dom Casmurro");
+atualizarQuantidade("O Segredo", 15);
+listarLivros();
